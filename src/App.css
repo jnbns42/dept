@@ -19,7 +19,7 @@ header {
   border: 2px solid #dbdbdb;
   border-radius: 10px;
   width: 100%;
-  font-size: 2.2rem;
+  font-size: 1.9rem;
   padding: 1.25rem 2rem 1.25rem 5rem; 
   background-image: url('/public/search.png');
   background-size: 2.4rem;
@@ -35,22 +35,36 @@ header {
   color: #000000;
   width: 100%;
   display: block;
-  
+  border-radius: 10px;
+  margin: -1.25rem 0 0 0;
+  padding: 1.25rem 0 0 0;
 }
 
 .autocomplete__list {
   list-style: none;
-  margin: -1rem 0 0 0;
-  padding: 1rem 0 0 0;
-
+  margin: 0;
+  padding: 0;
+  border-radius: 10px;
+  overflow: hidden;
+  font-size: 1.9rem;
 }
 
 .autocomplete__list__item {
   cursor: pointer;
-  padding: 2rem;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.autocomplete__list__item__button {
+  padding: 1.25rem 2rem;
   display: block;
+  width: 100%;
+  background: #ffffff;
+  border: none;
+  font-size: 1.9rem;
+  cursor: pointer;
+  text-align: left;
 }
 
-.autocomplete__list__item:hover {
+.autocomplete__list__item__button:hover {
   background: rgb(242, 242, 242);
 }

@@ -3,13 +3,15 @@ import React, {useState, useEffect} from 'react';
 export default function Search() {
 
     const [searchTerm, setSearchTerm] = useState('');
-    const [cities, setCities] = useState(null);
     const [showAutoComplete, setShowAutoComplete] = useState(false);
+    const [cities, setCities] = useState(null);
+    const [selectedCities, setSelectedCities] = useState(null);
+    
+    const countryCode = 'GB';
 
     // grab cities when app is mounted.
     const fetchCities = async () => {
-        const countryCode = 'GB';
-        const endpoint = `https://api.openaq.org/v2/cities?country=${countryCode}`;
+        const endpoint = `https://api.openaq.org/v2/cities?country_id=${countryCode}`;
         const response = await fetch(endpoint);
         const data = await response.json();
         setCities(data.results)
@@ -20,8 +22,34 @@ export default function Search() {
         setShowAutoComplete(true);
     }
 
-    const handleOptionClick = () => {
+    const fetchCityData = async (cityName) => {
+        const endpoint = `https://api.openaq.org/v2/cities?country_id=${countryCode}&city=${cityName}&order_by=lastUpdated`;
+        const response = await fetch(endpoint);
+        const data = await response.json();
+        return data;
+    }
+
+    const handleOptionClick = async (cityName) => {
        // Do a thing when we select a city
+       console.log(cityName);
+       const data = await fetchCityData(cityName);
+       setShowAutoComplete(false)
+    }
+
+    const handleBlur = (e) => {
+        e.preventDefault();
+
+        /*
+         Are we clicking an autocomplete option? 
+         If not, hide dropdown.
+        */
+        if(e.relatedTarget !== null) {
+            if (e.relatedTarget.classList.contains('autocomplete__list__item__button') !== false) {
+                setShowAutoComplete(false)
+            } 
+        } else {
+            setShowAutoComplete(false)
+        }
     }
 
     useEffect(() => {
@@ -30,17 +58,21 @@ export default function Search() {
 
   return (
 
-    <div className="input-container">
+    <div className="input-container" >
         <input className="input" type="text" placeholder="Enter city name..." 
             onKeyUp={ e => handleKeyUp(e.target.value)} 
-            onBlur= { e => setShowAutoComplete(false)} 
+            onBlur= { e => handleBlur(e)}
             onFocus={ e => e.target.value !== '' ?  setShowAutoComplete(true) :  setShowAutoComplete(false) }
         />
         {showAutoComplete &&
             <div className="autocomplete">
                 <ul className="autocomplete__list">
                     {cities.filter(city => city.city.includes(searchTerm)).map(city => (
-                        <li className="autocomplete__list__item">{city.city}</li>
+                        <li key={city.city} className="autocomplete__list__item">
+                            <button className="autocomplete__list__item__button" onClick={e => handleOptionClick(city.city)}>
+                                {city.city}
+                            </button>
+                        </li>
                     ))}
                 </ul>
             </div>
