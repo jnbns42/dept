@@ -1,38 +1,56 @@
 .App {
+  background: rgb(122,54,177);
+  background: linear-gradient(90deg, rgba(122,54,177,1) 0%, rgba(67,120,174,1) 100%); 
+  color: #ffffff;
+  font-size: 2.2rem; 
+  height: 100vh;
+}
+
+header {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.input-container {
+  max-width: 320px;
+  margin: 0 auto;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.input {
+  border: 2px solid #dbdbdb;
+  border-radius: 10px;
+  width: 100%;
+  font-size: 2.2rem;
+  padding: 1.25rem 2rem 1.25rem 5rem; 
+  background-image: url('/public/search.png');
+  background-size: 2.4rem;
+  background-repeat: no-repeat;
+  background-position: 1.5rem center;
+  box-sizing: border-box;
+  position: relative;
+
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.autocomplete {
+  background: #ffffff;
+  color: #000000;
+  width: 100%;
+  display: block;
+  
 }
 
-.App-link {
-  color: #61dafb;
+.autocomplete__list {
+  list-style: none;
+  margin: -1rem 0 0 0;
+  padding: 1rem 0 0 0;
+
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.autocomplete__list__item {
+  cursor: pointer;
+  padding: 2rem;
+  display: block;
+}
+
+.autocomplete__list__item:hover {
+  background: rgb(242, 242, 242);
 }
