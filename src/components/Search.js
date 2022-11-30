@@ -1,4 +1,7 @@
 import React, {useState, useEffect} from 'react';
+import styled from 'styled-components';
+
+import Card from './Card';
 
 export default function Search() {
 
@@ -23,25 +26,34 @@ export default function Search() {
     }
 
     const fetchCityData = async (cityName) => {
-        const endpoint = `https://api.openaq.org/v2/location?country_id=${countryCode}&city=${cityName}&order_by=lastUpdated`;
+        const endpoint = `https://api.openaq.org/v2/locations?country_id=${countryCode}&city=${cityName}&order_by=lastUpdated`;
         const response = await fetch(endpoint);
         const data = await response.json();
-        return data;
+        /*
+         Return the first location from results.
+         
+         Response is ordered by most recent reading, so
+         first item should be most recent.
+        */
+         return data.results[0]; 
     }
 
     const handleOptionClick = async (cityName) => {
        // Do a thing when we select a city
        console.log(cityName);
        const data = await fetchCityData(cityName);
+       setSelectedCities({...selectedCities, data})
+
        setShowAutoComplete(false)
     }
 
     const handleBlur = (e) => {
-        console.log('blur')
         e.preventDefault();
         /*
          Are we clicking an autocomplete option? 
          If not, hide dropdown.
+
+         Required to ensure dropdown options register click event.
         */
         if(e.relatedTarget !== null) {
             if (e.relatedTarget.classList.contains('autocomplete__list__item__button') == false) {
@@ -79,7 +91,7 @@ export default function Search() {
             }
         </div>
         <div className="selected-cities">
-            
+            <Card city="Manchester"/>
         </div>
     </>
   );
