@@ -17,7 +17,12 @@ export default function Card(props) {
         margin: 0 0 1rem;
     }
 
-    .time,
+    .time {
+        font-size: 1.3rem;
+        font-weight: 600;
+        text-transform: uppercase;
+    }
+
     .location,
     .values {
         font-size: 1.6rem;
@@ -53,7 +58,13 @@ export default function Card(props) {
       <div className="time">Updated <Moment fromNow ago>{props.time}</Moment> ago</div>
       <h2>{props.city}</h2>
       <div className="location">in {props.location}</div>
-      <div className="values">asdsd</div>
+      <div className="values"> Values: 
+        { props.parameters.map((reading, index) => (
+            <span> {reading.displayName}: {reading.lastValue}{props.parameters.length !== index+1 ? ',' : ''}</span>
+        ))
+
+        }
+      </div>
       <button className="close" onClick={e => handleClose(props.index)}>Close</button>
     </Card>
   );

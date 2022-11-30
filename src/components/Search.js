@@ -111,6 +111,7 @@ export default function Search() {
                         time={city.lastUpdated} 
                         selectedCities={selectedCities}
                         setSelectedCities={setSelectedCities}
+                        parameters={city.parameters}
                     />
                 ))
             }
