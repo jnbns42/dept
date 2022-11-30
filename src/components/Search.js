@@ -8,7 +8,7 @@ export default function Search() {
     const [searchTerm, setSearchTerm] = useState('');
     const [showAutoComplete, setShowAutoComplete] = useState(false);
     const [cities, setCities] = useState(null);
-    const [selectedCities, setSelectedCities] = useState(null);
+    const [selectedCities, setSelectedCities] = useState([]);
     
     const countryCode = 'GB';
 
@@ -42,7 +42,11 @@ export default function Search() {
        // Do a thing when we select a city
        console.log(cityName);
        const data = await fetchCityData(cityName);
-       setSelectedCities({...selectedCities, data})
+
+       setSelectedCities([
+        ...selectedCities,
+        data
+       ]);
 
        setShowAutoComplete(false)
     }
@@ -63,6 +67,13 @@ export default function Search() {
             setShowAutoComplete(false)
         }
     }
+
+    const CardList = styled.div`
+        display: flex;
+        max-width: 768px;
+        margin: 6rem auto;
+        gap: 3rem;
+    `;
 
     useEffect(() => {
         fetchCities();
@@ -90,9 +101,20 @@ export default function Search() {
                 </div>
             }
         </div>
-        <div className="selected-cities">
-            <Card city="Manchester"/>
-        </div>
+        <CardList>
+            {selectedCities.map((city, index) => (
+                    <Card 
+                        key={index} 
+                        index={index} 
+                        city={city.name} 
+                        location={`${city.city}, ${city.country}`} 
+                        time={city.lastUpdated} 
+                        selectedCities={selectedCities}
+                        setSelectedCities={setSelectedCities}
+                    />
+                ))
+            }
+        </CardList>
     </>
   );
 }
