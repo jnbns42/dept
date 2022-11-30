@@ -60,7 +60,7 @@ export default function Search() {
          Required to ensure dropdown options register click event.
         */
         if(e.relatedTarget !== null) {
-            if (e.relatedTarget.classList.contains('autocomplete__list__item__button') == false) {
+            if (e.relatedTarget.classList.contains('autocomplete__list__item__button') === false) {
                 setShowAutoComplete(false)
             } 
         } else {
