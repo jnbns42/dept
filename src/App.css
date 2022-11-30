@@ -4,10 +4,27 @@
   color: #ffffff;
   font-size: 2.2rem; 
   height: 100vh;
+  padding: 2.5rem;
+}
+
+@media screen and (min-width: 768px) {
+    .App {
+      padding: 0;
+    }
 }
 
 header {
   text-align: center;
+}
+
+h1 {
+  font-size: 3rem;
+}
+
+@media screen and (min-width: 768px) {
+  h1 {
+    font-size: 4.4rem;
+  }
 }
 
 .input-container {
@@ -27,7 +44,6 @@ header {
   background-position: 1.5rem center;
   box-sizing: border-box;
   position: relative;
-
 }
 
 .autocomplete {
@@ -37,6 +53,7 @@ header {
   display: block;
   border-radius: 10px;
   margin: -1.25rem 0 0 0;
+  
   padding: 1.25rem 0 0 0;
 }
 

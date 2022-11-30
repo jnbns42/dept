@@ -7,18 +7,30 @@ export default function Card(props) {
   const Card = styled.div`
     background: #ffffff;
     color: #000000;
-    flex: 0 0 50%;
+    flex: 0 0 calc(50% - 1.5rem);
     border-radius: 10px;
-    padding: 2rem;
+    padding: 3rem;
     position: relative;
+    box-sizing: border-box;
+    @media screen and (max-width: 768px) {
+        flex: 0 0 100%;
+    }
 
     h2 {
         color: rgb(122,54,177);
         margin: 0 0 1rem;
+        font-size: 2.5rem;
+        font-weight: 700;
     }
-
+      
+    @media screen and (min-width: 768px) {
+        h2 {
+            font-size: 3rem;
+        }
+    }
+      
     .time {
-        font-size: 1.3rem;
+        font-size: 1.6rem;
         font-weight: 600;
         text-transform: uppercase;
     }

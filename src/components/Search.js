@@ -70,6 +70,7 @@ export default function Search() {
 
     const CardList = styled.div`
         display: flex;
+        flex-wrap: wrap;
         max-width: 768px;
         margin: 6rem auto;
         gap: 3rem;
